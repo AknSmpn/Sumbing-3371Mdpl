@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Gallery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<button class="btn-back" onclick="goBack()">← Back</button>
+
+<h2 class="judul">Gallery</h2>
+
+<div class="gallery" id="gallery"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup" onclick="closePopup()">
+    <img id="popupImg">
+</div>
+
+<!-- SUPABASE (FIX GLOBAL) -->
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<script>
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+  "https://zlbbltgvhhszvdkuqmve.supabase.co",
+  "sb_publishable_2O18NtGThhCRupWuDryOPw_b8VJQ4_5"
+);
+</script>
+
+<!-- SCRIPT -->
+<script src="gallery.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

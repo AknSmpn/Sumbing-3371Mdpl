@@ -1,0 +1,187 @@
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+    opacity:1;
+    transition:opacity 0.5s;
+}
+body.show{
+    opacity:1;
+}
+
+/* CENTER */
+.center{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* TITLE */
+.title{
+    font-size:50px;
+    margin-bottom:20px;
+    animation:fadeDown 1s forwards;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.title:hover{
+    transform:scale(1.05);
+    color:#3b82f6;
+}
+
+.judul{
+    text-align:center;
+    margin-top:20px;
+}
+
+/* ANIMATION */
+@keyframes fadeDown{
+    from{opacity:0; transform:translateY(-20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeUp{
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* HOVER POP UP EFFECT */
+button{
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    padding:12px 20px;
+    transition: all 0.25s ease;
+}
+
+/* efek pop up */
+button:hover{
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* efek ditekan */
+button:active{
+    transform: scale(0.95);
+}
+
+/* NEXT */
+.btn-next{
+    background:#8d575700;
+    color:white;
+    outline: auto 1px #ffffff;
+}
+
+/* MENU */
+.menu-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    padding:20px;
+}
+
+.menu-btn{
+    background:#1e293b;
+    color:white;
+    outline: auto 1px #33415500;
+    width: 200px;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 0.5s forwards;
+}
+
+/* efek glow nocturnal */
+.menu-btn:hover{
+    background:#334155;
+    box-shadow: 0 0 15px rgba(59,130,246,0.6);
+    transform: translateY(-12px) scale(1.15);
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    padding:20px;
+}
+
+.gallery img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.1);
+}
+
+/* POPUP */
+.popup{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+}
+
+.popup img{
+    max-width:90%;
+    max-height:90%;
+    animation:zoom 0.3s;
+}
+
+@keyframes zoom{
+    from{transform:scale(0.8);}
+    to{transform:scale(1);}
+}
+/* PLACEHOLDER IMAGE */
+.img-placeholder{
+    width:100%;
+    aspect-ratio:1/1;
+    border:2px solid #64748b;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#94a3b8;
+    font-size:14px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.img-placeholder:hover{
+    background:rgba(255,255,255,0.05);
+    border-color:#3b82f6;
+    color:#3b82f6;
+}
+/* BACK BUTTON */
+.btn-back{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:transparent;
+    border:2px solid #64748b;
+    color:#64748b;
+    padding:8px 16px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-back:hover{
+    border-color:#3b82f6;
+    color:#3b82f6;
+    background:rgba(59,130,246,0.1);
+}
