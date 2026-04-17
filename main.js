@@ -11,12 +11,16 @@ window.pilihArah = function(arah){
     window.location.href = "menu.html?arah=" + arah;
 }
 
+/* FIXED: goGallery hanya 1 versi */
 window.goGallery = function(id){
-    window.location.href = "gallery.html?id=" + id;
+    const params = new URLSearchParams(window.location.search);
+    const arah = params.get("arah") || "naik";
+
+    window.location.href = "gallery.html?id=" + id + "&arah=" + arah;
 }
 
 window.goBackPilih = function(){
-    window.location.href = "pilih.html";
+    window.location.href = "index.html";
 }
 
 window.goBackHome = function(){
@@ -24,6 +28,10 @@ window.goBackHome = function(){
     setTimeout(()=>{
         window.location.href = "index.html";
     },300);
+}
+
+window.goBackMenu = function(){
+    window.location.href = "pilih.html";
 }
 
 /* MENU BUTTON */
@@ -43,11 +51,4 @@ if(menuContainer){
 
         menuContainer.appendChild(btn);
     }
-}
-
-window.goGallery = function(id){
-    const params = new URLSearchParams(window.location.search);
-    const arah = params.get("arah") || "naik";
-
-    window.location.href = "gallery.html?id=" + id + "&arah=" + arah;
 }
