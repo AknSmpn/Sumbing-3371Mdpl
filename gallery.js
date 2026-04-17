@@ -12,12 +12,38 @@ function init(){
     }
 
     const params = new URLSearchParams(window.location.search);
-const id = params.get("id") || "default";
-const arah = params.get("arah") || "naik";
+    const id = params.get("id") || "default";
+    const arah = params.get("arah") || "naik";
 
-const folder = arah + "/" + id;
+    const folder = arah + "/" + id;
 
     loadImages(folder);
+
+    /* ========================
+       DRAG & DROP MULTI UPLOAD
+    ======================== */
+    gallery.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        gallery.style.background = "rgba(59,130,246,0.1)";
+    });
+
+    gallery.addEventListener("dragleave", () => {
+        gallery.style.background = "transparent";
+    });
+
+    gallery.addEventListener("drop", async (e) => {
+        e.preventDefault();
+        gallery.style.background = "transparent";
+
+        const files = Array.from(e.dataTransfer.files);
+        if(!files.length) return;
+
+        for(const file of files){
+            await uploadFile(file, folder);
+        }
+
+        loadImages(folder);
+    });
 
     /* ========================
        LOAD IMAGES
@@ -60,7 +86,26 @@ const folder = arah + "/" + id;
     }
 
     /* ========================
-       UPLOAD
+       UPLOAD (MULTI SUPPORT)
+    ======================== */
+    async function uploadFile(file, folder){
+
+        const fileName = Date.now() + "-" + file.name;
+
+        const { data, error } = await supabaseClient.storage
+            .from("sumbing")
+            .upload(folder + "/" + fileName, file);
+
+        console.log("UPLOAD:", data, error);
+
+        if(error){
+            alert("Upload gagal: " + error.message);
+            return;
+        }
+    }
+
+    /* ========================
+       UPLOAD BOX
     ======================== */
     function createUploadBox(folder){
 
@@ -71,25 +116,17 @@ const folder = arah + "/" + id;
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
+        input.multiple = true; // 🔥 MULTI SELECT
         input.style.display = "none";
 
         box.onclick = () => input.click();
 
         input.onchange = async (e) => {
-            const file = e.target.files[0];
-            if(!file) return;
+            const files = Array.from(e.target.files);
+            if(!files.length) return;
 
-            const fileName = Date.now() + "-" + file.name;
-
-            const { data, error } = await supabaseClient.storage
-                .from("sumbing")
-                .upload(folder + "/" + fileName, file);
-
-            console.log("UPLOAD:", data, error);
-
-            if(error){
-                alert("Upload gagal: " + error.message);
-                return;
+            for(const file of files){
+                await uploadFile(file, folder);
             }
 
             alert("Upload berhasil!");
