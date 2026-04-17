@@ -15,6 +15,10 @@ window.goGallery = function(id){
     window.location.href = "gallery.html?id=" + id;
 }
 
+window.goBackPilih = function(){
+    window.location.href = "pilih.html";
+}
+
 /* MENU BUTTON */
 const menuContainer = document.getElementById("menuContainer");
 
