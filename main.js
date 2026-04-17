@@ -19,6 +19,13 @@ window.goBackPilih = function(){
     window.location.href = "pilih.html";
 }
 
+window.goBackHome = function(){
+    document.body.classList.remove("show");
+    setTimeout(()=>{
+        window.location.href = "index.html";
+    },300);
+}
+
 /* MENU BUTTON */
 const menuContainer = document.getElementById("menuContainer");
 
